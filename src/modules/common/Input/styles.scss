@@ -1,0 +1,21 @@
+.input-field {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    border-radius: 2px;
+
+    input {
+        border: 2px solid #212121;
+        padding: .8rem .2rem;
+        border-radius: 5px;
+        font-size: .9em;
+    }
+
+    span {
+        color: red;
+    }
+
+    label {
+        margin-bottom: 1rem;
+    }
+}
