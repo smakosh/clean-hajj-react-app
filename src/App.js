@@ -39,7 +39,7 @@ const AppRoutes = () => (
 				<Public path="/register" exact component={Register} />
 				<Private path="/dashboard" exact component={Dashboard} />
 				<Private path="/profile" exact component={Profile} />
-				<Private path="/profile/edit" exact component={EditProfile} />
+				<Private path="/edit-profile" exact component={EditProfile} />
 				{/* Other routes */}
 				{/* <Private path="/add-worker" component={AddWorker} />
 				<Private path="/edit-worker/:id" component={EditWorker} />

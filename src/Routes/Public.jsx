@@ -8,7 +8,7 @@ const Public = ({ auth, component: Component, ...rest }) => (
 	<Route
 		{...rest}
 		render={props => (auth.isLoggedIn ? (
-			<Redirect to="/dashboard" />
+			<Redirect to="/profile" />
 		) : (
 			<Component {...props} />
 		))

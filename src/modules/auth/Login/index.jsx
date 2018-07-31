@@ -15,9 +15,9 @@ class Login extends Component {
 		error: undefined
 	}
 
-	componentWillReceiveProps(nextProps) {
-		if (nextProps.auth.error) {
-			this.setState({ error: nextProps.auth.error })
+	componentDidMount() {
+		if (this.props.auth.error) {
+			this.setState({ error: this.props.auth.error.error })
 		}
 	}
 
@@ -33,7 +33,6 @@ class Login extends Component {
 			this.setState({ passwordError: 'Password is required' })
 		} else {
 			this.setState({ emailError: false, passwordError: false, error: undefined })
-			console.log(email, password)
 			login(email, password)
 		}
 	}
@@ -57,7 +56,7 @@ class Login extends Component {
 						<div className="center">
 							<Button type="submit">Login</Button>
 						</div>
-						<p className="center">Don't have an account? no worries! please <Link to="/register">Create one</Link></p>
+						<p className="center">Don't have an account? Please <Link to="/register">Create one</Link></p>
 					</form>
 				</Card>
 			</Container>

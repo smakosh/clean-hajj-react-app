@@ -3,65 +3,78 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { compose, branch, renderComponent } from 'recompose'
 import { editProfile } from './actions'
-import ProfileForm from './components/ProfileForm'
-import { Loader } from '../common'
-import isEmpty from '../../utils/isEmpty'
+import { Loader, Container, Button, Input, Card, Error } from '../common'
 
 class EditProfile extends Component {
-    state = {
-    	handle: '',
-    	loading: false,
-    	error: undefined
-    }
+	constructor(props) {
+		super(props)
+		this.state = {
+			firstName: props.auth.user.firstName || '',
+			lastName: props.auth.user.lastName || '',
+			username: props.auth.user.username || '',
+			errorFirstName: undefined,
+			errorLastName: undefined,
+			errorUsername: undefined,
+			error: undefined
+		}
+	}
 
-    componentWillReceiveProps(nextProps) {
-    	if (nextProps.profile.error) {
-    		this.setState({ error: nextProps.profile.error })
+	componentDidMount() {
+    	if (this.props.auth.error) {
+    		this.setState({ error: this.props.auth.error.error })
     	}
-
-    	if (nextProps.auth.auth) {
-    		const { auth } = nextProps.auth
-
-    		auth.handle = !isEmpty(auth.handle) ? auth.handle : ''
-
-    		this.setState({
-    			handle: auth.handle,
-    			loading: false
-    		})
-    	}
-    }
+	}
 
     onSubmit = e => {
     	e.preventDefault()
-    	this.setState({ loading: true })
+
     	const { editProfile, history } = this.props
-    	const { handle } = this.state
-    	const profileData = { handle }
+    	const { firstName, lastName, username } = this.state
+
+    	if (firstName === '') {
+    		this.setState({ errorFirstName: 'First name field is required' })
+    	} else if (lastName === '') {
+    		this.setState({ errorLastName: 'Last name field is required' })
+    	} else if (username === '') {
+    		this.setState({ errorUsername: 'username field is required' })
+    	}
+
+    	const profileData = { firstName, lastName, username }
+
     	editProfile(profileData, history)
-    	this.setState({ loading: false })
     }
 
     handleChange = e => this.setState({ [e.target.name]: e.target.value })
 
     render() {
+    	const {
+    		firstName,
+    		lastName,
+    		username,
+    		errorFirstName,
+    		errorLastName,
+    		errorUsername,
+    		error } = this.state
     	return (
-    		<React.Fragment>
-    			{this.state.loading ? (
-    				<Loader />
-    			) : (
-    				<ProfileForm
-    					{...this.state}
-    					handleChange={this.handleChange}
-    					onSubmit={this.onSubmit}
-    				/>
-    			)}
-    		</React.Fragment>
+    		<Container className="profile-form">
+    			<Card>
+    				<form onSubmit={this.onSubmit}>
+    					<Input type="text" label="First name" name="firstName" value={firstName} onChange={this.handleChange} error={errorFirstName} />
+    					<Input type="text" label="Last name" name="lastName" value={lastName} onChange={this.handleChange} error={errorLastName} />
+    					<Input type="text" label="Username" name="username" value={username} onChange={this.handleChange} error={errorUsername} />
+    					{error !== undefined && <Error>{error}</Error>}
+    					<div className="center">
+    						<Button type="submit">Submit</Button>
+    					</div>
+    				</form>
+    			</Card>
+    		</Container>
     	)
     }
 }
 
-const mapStateToProps = ({ auth }) => ({
-	auth
+const mapStateToProps = state => ({
+	auth: state.auth
 })
 
 const enhance = compose(

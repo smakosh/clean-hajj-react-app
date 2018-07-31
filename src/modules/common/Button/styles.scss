@@ -6,4 +6,8 @@
     border: unset;
     border-radius: 5px;
     cursor: pointer;
+
+    &:focus {
+        outline: unset;
+    }
 }

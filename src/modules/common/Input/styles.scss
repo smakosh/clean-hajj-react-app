@@ -9,10 +9,19 @@
         padding: .8rem .2rem;
         border-radius: 5px;
         font-size: .9em;
+        margin-bottom: .5rem;
+
+        &:focus {
+            outline: unset;
+        }
+    }
+
+    .red-border {
+        border-color: rgb(244,67,54);
     }
 
     span {
-        color: red;
+        color: rgb(244,67,54);
     }
 
     label {

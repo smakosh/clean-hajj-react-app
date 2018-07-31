@@ -13,17 +13,19 @@ class Register extends Component {
 		username: '',
 		email: '',
 		password: '',
+		confirmPassword: '',
 		emailError: false,
 		passwordError: false,
+		confirmPasswordError: false,
 		firstNameError: false,
 		lastNameError: false,
 		usernameError: false,
 		error: undefined
 	}
 
-	componentWillReceiveProps(nextProps) {
-		if (nextProps.auth.error) {
-			this.setState({ error: nextProps.auth.error })
+	componentDidMount() {
+		if (this.props.auth.error) {
+			this.setState({ error: this.props.auth.error.error })
 		}
 	}
 
@@ -31,9 +33,7 @@ class Register extends Component {
 		e.preventDefault()
 		const { email, password, firstName, lastName, username, confirmPassword } = this.state
 		const { register } = this.props
-		if (!this.validateEmail(email)) {
-			this.setState({ emailError: 'Invalid email' })
-		} else if (firstName === '') {
+		if (firstName === '') {
 			this.setState({ firstNameError: 'firstName is required' })
 		} else if (lastName === '') {
 			this.setState({ lastNameError: 'lastName is required' })
@@ -41,12 +41,22 @@ class Register extends Component {
 			this.setState({ usernameError: 'username is required' })
 		} else if (email === '') {
 			this.setState({ emailError: 'Email is required' })
+		} else if (!this.validateEmail(email)) {
+			this.setState({ emailError: 'Invalid email' })
 		} else if (password === '') {
 			this.setState({ passwordError: 'Password is required' })
 		} else if (password !== confirmPassword) {
 			this.setState({ confirmPasswordError: 'Passwords don\'t match' })
 		} else {
-			this.setState({ emailError: false, passwordError: false, error: undefined })
+			this.setState({
+				firstNameError: false,
+				lastNameError: false,
+				usernameError: false,
+				emailError: false,
+				passwordError: false,
+				confirmPasswordError: false,
+				error: undefined
+			})
 			register(firstName, lastName, username, email, password)
 		}
 	}
@@ -88,7 +98,7 @@ class Register extends Component {
 						<div className="center">
 							<Button type="submit">Register</Button>
 						</div>
-						<p className="center">Already have an account? no worries! please <Link to="/">Login</Link></p>
+						<p className="center">Already have an account? Please <Link to="/">Login</Link></p>
 					</form>
 				</Card>
 			</Container>

@@ -4,9 +4,9 @@ import setAdminHeader from '../../utils/setAdminHeader'
 import setWorkerHeader from '../../utils/setWorkerHeader'
 import { history } from '../../App'
 
-// const PROD_API = process.env.REACT_APP_PROD_API
-const URL = 'http://localhost:5000'
-// const URL = `https://cors-anywhere.herokuapp.com/${API}`
+const API = process.env.REACT_APP_PROD_API
+// const API = 'http://localhost:5000'
+const URL = `https://cors-anywhere.herokuapp.com/${API}`
 
 export const verifyToken = token => dispatch => {
 	dispatch({ type: 'LOADING_USER' })
@@ -33,10 +33,10 @@ export const register = (firstName, lastName, username, email, password) => disp
 			localStorage.setItem('jwtToken', token)
 			setAuthToken(token)
 
-			if (res.data.user.type === 'admin') {
+			if (res.data.type === 'admin') {
 				setAdminHeader(token)
 				setWorkerHeader(token)
-			} else if (res.data.user.type === 'worker') {
+			} else if (res.data.type === 'worker') {
 				setWorkerHeader(token)
 			}
 
@@ -54,10 +54,10 @@ export const login = (email, password) => dispatch => {
 			localStorage.setItem('jwtToken', token)
 			setAuthToken(token)
 
-			if (res.data.user.type === 'admin') {
+			if (res.data.type === 'admin') {
 				setAdminHeader(token)
 				setWorkerHeader(token)
-			} else if (res.data.user.type === 'worker') {
+			} else if (res.data.type === 'worker') {
 				setWorkerHeader(token)
 			}
 
