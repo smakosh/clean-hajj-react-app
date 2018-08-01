@@ -9,7 +9,7 @@ const Header = ({ logout }) => (
 	<div className="header-container">
 		<Container className="header">
 			<h2>
-				<Link to="/" style={{ textDecoration: 'none', color: '#212121' }}>Clean Hajj</Link>
+				<Link to="/dashboard" style={{ textDecoration: 'none', color: '#212121' }}>Clean Hajj</Link>
 			</h2>
 			<div className="left">
 				<div className="avatar">

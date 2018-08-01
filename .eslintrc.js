@@ -47,7 +47,8 @@ module.exports = {
         'react/destructuring-assignment': 0,
         'no-shadow': 0,
         'implicit-arrow-linebreak': 0,
-        'no-mixed-spaces-and-tabs': 0
+        'no-mixed-spaces-and-tabs': 0,
+        'no-nested-ternary': 0
     },
     'parser': 'babel-eslint',
     'globals': {

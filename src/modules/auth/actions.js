@@ -1,7 +1,5 @@
 import axios from 'axios'
 import setAuthToken from '../../utils/setAuthToken'
-import setAdminHeader from '../../utils/setAdminHeader'
-import setWorkerHeader from '../../utils/setWorkerHeader'
 import { history } from '../../App'
 
 const API = process.env.REACT_APP_PROD_API
@@ -33,13 +31,6 @@ export const register = (firstName, lastName, username, email, password) => disp
 			localStorage.setItem('jwtToken', token)
 			setAuthToken(token)
 
-			if (res.data.type === 'admin') {
-				setAdminHeader(token)
-				setWorkerHeader(token)
-			} else if (res.data.type === 'worker') {
-				setWorkerHeader(token)
-			}
-
 			dispatch({ type: 'SAVE_USER', payload: res.data })
 			history.push('/profile')
 		})
@@ -53,13 +44,6 @@ export const login = (email, password) => dispatch => {
 			const { token } = res.data
 			localStorage.setItem('jwtToken', token)
 			setAuthToken(token)
-
-			if (res.data.type === 'admin') {
-				setAdminHeader(token)
-				setWorkerHeader(token)
-			} else if (res.data.type === 'worker') {
-				setWorkerHeader(token)
-			}
 
 			dispatch({ type: 'SAVE_USER', payload: res.data })
 			history.push('/profile')
