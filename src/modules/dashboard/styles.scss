@@ -24,3 +24,88 @@
 .error-select {
     border-color: red;
 }
+
+.dashboard-container {
+    padding: 4rem 0;
+}
+
+.card-item {
+    padding: 1rem;
+    width: 95%;
+
+    .item-details {
+        display: flex;
+        justify-content: space-between;
+
+        .flexed-buttons {
+            display: flex;
+            flex-direction: column;
+
+            button, a {
+                align-self: flex-start;
+            }
+
+            .mb1{
+                margin-bottom: 1rem;
+            }
+        }
+
+        button, a {
+            align-self: center;
+        }
+    }
+}
+
+.google-map {
+    height: 500px;
+}
+
+.marker {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    left: -20px;
+    top: -20px;
+    border: 5px solid #f44336;
+    border-radius: 40px;
+    background-color: white;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 4px;
+    color: #212121;
+    line-height: 40px;
+}
+
+.trashcans-container-map {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    .meh-trashcans {
+        flex: 1;
+        padding-right: 2rem;
+
+        @media screen and (max-width: 960px) {
+            margin-bottom: 2rem;
+            padding-right: unset;
+            width: 95%;
+            flex: unset;
+        }
+    }
+
+    .meh-map {
+        flex: 1;
+        padding-left: 2rem;
+
+        @media screen and (max-width: 960px) {
+            padding-left: unset;
+            width: 100%;
+            flex: unset;
+        }
+    }
+
+    @media screen and (max-width: 960px) {
+        flex-direction: column;
+    }
+}

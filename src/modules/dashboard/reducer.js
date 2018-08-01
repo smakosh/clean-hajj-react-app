@@ -15,7 +15,6 @@ export default (state = { loading: false }, action) => {
 		}
 	case 'GET_TRASHCANS':
 		return {
-			...state,
 			trashcans: action.payload,
 			isEmpty: !isEmpty(action.payload),
 			loading: false

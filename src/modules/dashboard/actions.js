@@ -7,14 +7,14 @@ const URL = `https://cors-anywhere.herokuapp.com/${API}`
 
 export const trashcanError = err => dispatch => {
 	dispatch({
-		type: 'STUDENT_ERROR',
+		type: 'TRASHCAN_ERROR',
 		error: err.response.data
 	})
 }
 
-export const getTrashCans = () => dispatch => {
+export const getTrashcans = () => dispatch => {
 	dispatch({ type: 'LOADING' })
-	axios.get(`${URL}api/trashcan/`)
+	axios.get(`${URL}/api/trashcan/`)
 		.then(res => dispatch({
 			type: 'GET_TRASHCANS',
 			payload: res.data
@@ -24,7 +24,7 @@ export const getTrashCans = () => dispatch => {
 
 export const addNewTrashCan = (name, type, lat, lng) => dispatch => {
 	dispatch({ type: 'LOADING' })
-	axios.post(`${URL}api/trashcan`, { name, type, lat, lng })
+	axios.post(`${URL}/api/trashcan`, { name, type, lat, lng })
 		.then(res => dispatch({
 			type: 'ADD_TRASHCAN',
 			payload: res.data
@@ -34,7 +34,7 @@ export const addNewTrashCan = (name, type, lat, lng) => dispatch => {
 
 export const editTrashcan = (id, name, type, lat, lng) => dispatch => {
 	dispatch({ type: 'LOADING' })
-	axios.patch(`${URL}api/trashcan/${id}`, { name, type, lat, lng })
+	axios.patch(`${URL}/api/trashcan/${id}`, { name, type, lat, lng })
 		.then(() => {
 			dispatch({
 				type: 'CLEAR_TRASHCANS',
@@ -47,7 +47,7 @@ export const editTrashcan = (id, name, type, lat, lng) => dispatch => {
 
 export const filledTrashcan = id => dispatch => {
 	dispatch({ type: 'LOADING' })
-	axios.patch(`${URL}api/trashcan/filled/${id}`)
+	axios.patch(`${URL}/api/trashcan/filled/${id}`)
 		.then(() => {
 			dispatch({
 				type: 'CLEAR_TRASHCANS',
@@ -60,7 +60,7 @@ export const filledTrashcan = id => dispatch => {
 
 export const report = id => dispatch => {
 	dispatch({ type: 'LOADING' })
-	axios.patch(`${URL}api/trashcan/report/${id}`)
+	axios.patch(`${URL}/api/trashcan/report/${id}`)
 		.then(() => {
 			dispatch({
 				type: 'CLEAR_TRASHCANS',
@@ -73,7 +73,7 @@ export const report = id => dispatch => {
 
 export const getTrashcanById = id => dispatch => {
 	dispatch({ type: 'LOADING' })
-	axios.get(`${URL}api/trashcan/${id}`)
+	axios.get(`${URL}/api/trashcan/${id}`)
 		.then(res => dispatch({
 			type: 'GET_TRASHCAN_BY_ID',
 			payload: res.data
@@ -84,7 +84,7 @@ export const getTrashcanById = id => dispatch => {
 export const deleteTrashcan = (id, data) => dispatch => {
 	dispatch({ type: 'LOADING' })
 	const newStudents = data.filter(({ _id }) => _id !== id)
-	axios.delete(`${URL}api/trashcan/${id}`)
+	axios.delete(`${URL}/api/trashcan/${id}`)
 		.then(() => dispatch({
 			type: 'DELETE_TRASHCAN',
 			payload: newStudents
