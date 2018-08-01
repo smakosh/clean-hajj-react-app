@@ -30,7 +30,8 @@ export default (state = { loading: false }, action) => {
 		return {
 			...state,
 			trashcans: action.payload,
-			isEmpty: 
+			isEmpty: !isEmpty(action.payload),
+			loading: false
 		}
 	case 'DELETE_TRASHCAN':
 		return  {

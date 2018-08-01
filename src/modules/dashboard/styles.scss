@@ -1,0 +1,26 @@
+.empty-state {
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+
+    .responsive-img {
+        width: 100%;
+        margin-bottom: 2rem;
+        display: flex;
+        justify-content: center;
+    }
+
+    a {
+        align-self: center;
+    }
+}
+
+.select {
+    margin-bottom: 1rem;
+}
+
+.error-select {
+    border-color: red;
+}

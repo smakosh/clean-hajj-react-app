@@ -11,8 +11,8 @@ class Dashboard extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			trashcans: props.trashcan.trashcans || undefined,
-			selectedTrashcan: props.trashcan.trashcans[0] || undefined
+			trashcans: isEmpty(props.trashcan) ? props.trashcan.trashcans : undefined,
+			selectedTrashcan: isEmpty(props.trashcan) ? props.trashcan.trashcans[0] : undefined
 		}
 	}
 
@@ -28,10 +28,13 @@ class Dashboard extends Component {
 		return (
 			<Container className="dashboard-container">
 				{
-					isEmpty(trashcans) ? (
-						<div style={{ textAlign: 'center' }}>
-							<h2>No trashcans are available right now, start adding a new one!</h2>
-							<Button href="/add-trashcan">Add trashcan</Button>
+					isEmpty(trashcans) || trashcans === undefined ? (
+						<div className="empty-state">
+							<div className="responsive-img">
+								<img src="https://cdn.dribbble.com/users/231299/screenshots/4873214/garbage.png" alt="trashcans not available" />
+							</div>
+							<h2>No trashcans are available right now! {auth.user.typee === 'admin' && 'start adding a new one!'}</h2>
+							{auth.user.type === 'admin' && <Button href="/add-trashcan">Add trashcan</Button>}
 						</div>
 					) : (
 						<div>
@@ -42,12 +45,18 @@ class Dashboard extends Component {
 										itemOnMap={this.itemOnMap}
 										report={() => this.report(selectedTrashcan.id)}
 									/>
-								) : (
+								) : auth.user.type === 'admin' ? (
 									<Item
 										{...selectedTrashcan}
 										itemOnMap={this.itemOnMap}
 										checkFilled={() => this.checkFilled(selectedTrashcan.id)}
 										edit
+									/>
+								) : (
+									<Item
+										{...selectedTrashcan}
+										itemOnMap={this.itemOnMap}
+										checkFilled={() => this.checkFilled(selectedTrashcan.id)}
 									/>
 								)
 							}
@@ -68,7 +77,7 @@ const mapStateToProps = ({ auth, trashcan }) => ({
 const enhance = compose(
 	connect(mapStateToProps, { getTrashCans, filledTrashcan, report }),
 	lifecycle({
-		componentDidMount() {
+		componentWillMount() {
 			this.props.getTrashCans()
 		}
 	}),

@@ -1,6 +1,6 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
-import TrashCansReducer from '../modules/trashcans/reducer'
+import TrashCansReducer from '../modules/dashboard/reducer'
 // import WorkersReducer from '../modules/workers/reducer'
 import AuthReducer from '../modules/auth/reducer'
 
