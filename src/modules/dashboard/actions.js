@@ -22,9 +22,9 @@ export const getTrashcans = () => dispatch => {
 		.catch(err => dispatch(trashcanError(err)))
 }
 
-export const addNewTrashCan = (name, type, lat, lng) => dispatch => {
+export const addNewTrashCan = (name, lat, lng) => dispatch => {
 	dispatch({ type: 'LOADING' })
-	axios.post(`${URL}/api/trashcan`, { name, type, lat, lng })
+	axios.post(`${URL}/api/trashcan`, { name, lat, lng })
 		.then(res => dispatch({
 			type: 'ADD_TRASHCAN',
 			payload: res.data
@@ -32,9 +32,9 @@ export const addNewTrashCan = (name, type, lat, lng) => dispatch => {
 		.catch(err => dispatch(trashcanError(err)))
 }
 
-export const editTrashcan = (id, name, type, lat, lng) => dispatch => {
+export const editTrashcan = (id, name, lat, lng) => dispatch => {
 	dispatch({ type: 'LOADING' })
-	axios.patch(`${URL}/api/trashcan/${id}`, { name, type, lat, lng })
+	axios.patch(`${URL}/api/trashcan/${id}`, { name, lat, lng })
 		.then(() => {
 			dispatch({
 				type: 'CLEAR_TRASHCANS',

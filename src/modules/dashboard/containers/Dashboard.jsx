@@ -91,8 +91,8 @@ class Dashboard extends Component {
 													className={cx('marker', { 'marker-empty': !trashcan.filled, 'marker-filled': trashcan.filled })}
 													lat={trashcan.lat}
 													lng={trashcan.lng}
-													text={trashcan.type.split('')[0].toUpperCase()}
-												>{trashcan.type.split('')[0].toUpperCase()}</div>
+													text={trashcan.name.split('')[0].toUpperCase()}
+												>{trashcan.name.split('')[0].toUpperCase()}</div>
 											))}
 										</Map>}
 									</div>

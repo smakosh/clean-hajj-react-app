@@ -6,10 +6,9 @@ import { Loader } from '../../common'
 import TrashcanForm from '../components/TrashcanForm'
 import '../styles.scss'
 
-class addTrashcan extends Component {
+class AddTrashcan extends Component {
     state = {
     	name: '',
-    	type: '',
     	lat: '',
     	lng: '',
     	errorName: undefined,
@@ -19,33 +18,30 @@ class addTrashcan extends Component {
 
     onSubmit = e => {
     	e.preventDefault()
-    	const { name, type, lat, lng } = this.state
+    	const { name, lat, lng } = this.state
     	const { addNewTrashCan } = this.props
     	if (name === '') {
     		this.setState({ errorName: 'Name field is required' })
-    	} else if (type === '') {
-    		this.setState({ errorType: 'Type field is required' })
     	} else if (lat === '') {
     		this.setState({ errorLat: 'Lat field is required' })
     	} else if (lng === '') {
     		this.setState({ errorLng: 'Lng field is required' })
     	}
 
-    	addNewTrashCan(name, type, lat, lng)
+    	addNewTrashCan(name, lat, lng)
     }
 
-    handleChange = e => this.setState({ [e.target.name]: e.target.value })
+	handleChange = e => this.setState({ [e.target.name]: e.target.value })
 
-    render() {
-    	console.log(this.state)
+	render() {
     	return (
     		<TrashcanForm
     			{...this.state}
     			onSubmit={this.onSubmit}
-    			handleChange={this.handleChange}
+				handleChange={this.handleChange}
     		/>
     	)
-    }
+	}
 }
 
 const mapStateToProps = ({ trashcan }) => ({
@@ -67,4 +63,4 @@ const enhance = compose(
 	)
 )
 
-export default enhance(addTrashcan)
+export default enhance(AddTrashcan)

@@ -1,6 +1,6 @@
 .header-container {
     padding: 1.4rem 0;
-    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, .5);
+    box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.08);
 
     .header {
         display: flex;
@@ -10,12 +10,6 @@
         .left {
             display: flex;
             align-items: center;
-
-            img {
-                border-radius: 100%;
-                border: 2px solid #212121;
-                margin-right: .5rem;
-            }
 
             p {
                 margin-right: 1rem;

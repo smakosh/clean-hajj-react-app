@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { compose, branch, renderNothing } from 'recompose'
 import { Link } from 'react-router-dom'
 import { logout } from '../../auth/actions'
-import { Container, Button } from '../../common'
+import { Container, Button, Avatar } from '../../common'
 import './styles.scss'
 
 const Header = ({ logout, auth }) => (
@@ -14,7 +14,7 @@ const Header = ({ logout, auth }) => (
 			</h2>
 			<div className="left">
 				<Link to="/profile">
-					<img src="https://api.adorable.io/avatars/50/abott@adorable.png" alt="avatar" />
+					<Avatar type={auth.user.type} />
 				</Link>
 				<p>Hello {auth.user.username}!</p>
 				{auth.user.type === 'customer' && <p>{auth.user.points} points</p>}

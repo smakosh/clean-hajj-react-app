@@ -18,7 +18,7 @@ export const verifyToken = token => dispatch => {
 	}).then(res => {
 		setAuthToken(token)
 		dispatch({ type: 'SAVE_USER', payload: res.data })
-		history.push('/profile')
+		history.push('/dashboard')
 	})
 		.catch(() => dispatch({ type: 'SAVE_USER', payload: {} }))
 }
@@ -32,7 +32,7 @@ export const register = (firstName, lastName, username, email, password) => disp
 			setAuthToken(token)
 
 			dispatch({ type: 'SAVE_USER', payload: res.data })
-			history.push('/profile')
+			history.push('/dashboard')
 		})
 		.catch(err => dispatch({ type: 'AUTH_FAILED', payload: err.response.data }))
 }
@@ -46,7 +46,7 @@ export const login = (email, password) => dispatch => {
 			setAuthToken(token)
 
 			dispatch({ type: 'SAVE_USER', payload: res.data })
-			history.push('/profile')
+			history.push('/dashboard')
 		})
 		.catch(err => dispatch({ type: 'AUTH_FAILED', payload: err.response.data }))
 }

@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Route, Redirect } from 'react-router-dom'
 import { compose, branch, renderComponent } from 'recompose'
-import { Loader } from '../modules/common'
+import { Loader, Footer } from '../modules/common'
 import Header from '../modules/common/Header'
 
 const Private = ({ auth, component: Component, ...rest }) => (
@@ -12,6 +12,7 @@ const Private = ({ auth, component: Component, ...rest }) => (
 			<React.Fragment>
 				<Header />
 				<Component {...props} />
+				<Footer />
 			</React.Fragment>
 		) : (
 			<Redirect to="/" />
