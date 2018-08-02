@@ -32,8 +32,6 @@ class Dashboard extends Component {
 		}
 	}
 
-	itemOnMap = id => this.setState({ selectedTrashcan: id })
-
 	checkFilled = id => this.props.filledTrashcan(id)
 
 	report = id => this.props.report(id)
@@ -67,23 +65,26 @@ class Dashboard extends Component {
 													report={() => this.report(selectedTrashcan.id)}
 												/>
 											) : auth.user.type === 'admin' ? (
-												<Item
-													{...selectedTrashcan}
-													itemOnMap={this.itemOnMap}
-													checkFilled={() => this.checkFilled(selectedTrashcan.id)}
-													edit
-												/>
+												<React.Fragment>
+													<Item
+														{...selectedTrashcan}
+														checkFilled={() => this.checkFilled(selectedTrashcan.id)}
+														edit
+													/>
+													<div style={{ marginTop: '2rem' }}>
+														<Button href="/add-trashcan">Add trashcan</Button>
+													</div>
+												</React.Fragment>
 											) : (
 												<Item
 													{...selectedTrashcan}
-													itemOnMap={this.itemOnMap}
 													checkFilled={() => this.checkFilled(selectedTrashcan.id)}
 												/>
 											)
 										}
 									</div>
 									<div className="meh-map">
-										{<Map>
+										{<Map {...selectedTrashcan}>
 											{trashcans.map(trashcan => (
 												<div
 													key={trashcan._id}

@@ -7,7 +7,6 @@ import './styles.scss'
 const Profile = ({ auth }) => (
 	<Container className="empty-profile">
 		<h2>Welcome {`${auth.user.firstName} ${auth.user.lastName}`}</h2>
-		<p>Points: {auth.user.points}</p>
 		<div className="center">
 			<Button href="/edit-profile">Edit profile</Button>
 		</div>
