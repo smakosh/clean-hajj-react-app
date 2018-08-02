@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { compose, renderComponent, branch } from 'recompose'
 import { Input, Button, Error, Loader, Card, Container } from '../../common'
 import { login } from '../actions'
+import cleanifyLogo from '../assets/logo.svg'
 import '../styles.scss'
 
 class Login extends Component {
@@ -49,6 +50,9 @@ class Login extends Component {
 		return (
 			<Container className="auth">
 				<Card>
+					<div className="brand">
+						<img src={cleanifyLogo} alt="cleanify logo" />
+					</div>
 					<form onSubmit={this.onSubmit}>
 						<Input label="Email" type="email" name="email" value={email} onChange={this.handleChange} error={emailError} />
 						<Input label="Password" type="password" name="password" value={password} onChange={this.handleChange} error={passwordError} />

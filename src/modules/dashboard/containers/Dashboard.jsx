@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { compose, branch, renderComponent } from 'recompose'
+import cx from 'classnames'
 import { connect } from 'react-redux'
 import Map from '../components/Map'
 import { Loader, Button, Container } from '../../common'
@@ -86,7 +87,7 @@ class Dashboard extends Component {
 											{trashcans.map(trashcan => (
 												<div
 													key={trashcan._id}
-													className="marker"
+													className={cx('marker', { 'marker-empty': !trashcan.filled, 'marker-filled': trashcan.filled })}
 													lat={trashcan.lat}
 													lng={trashcan.lng}
 													text={trashcan.type.split('')[0].toUpperCase()}
