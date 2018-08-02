@@ -5,7 +5,7 @@ import '../styles.scss'
 export default class Map extends Component {
 	static defaultProps = {
 		center: [21.6168223, 39.1564055],
-		zoom: 25
+		zoom: 14
 	}
 
 	onBoundsChange = () => console.log('test')

@@ -43,7 +43,12 @@ class Dashboard extends Component {
 		}
 	}
 
-	checkFilled = id => this.props.filledTrashcan(id)
+	checkFilled = id => {
+		this.props.filledTrashcan(id)
+		setTimeout(() => {
+			window.document.location.reload()
+		}, 3000)
+	}
 
 	report = id => this.props.report(id)
 
@@ -75,13 +80,13 @@ class Dashboard extends Component {
 												<Item
 													{...selectedTrashcan}
 													itemOnMap={this.itemOnMap}
-													report={() => this.report(selectedTrashcan.id)}
+													report={() => this.report(selectedTrashcan._id)}
 												/>
 											) : auth.user.type === 'admin' ? (
 												<React.Fragment>
 													<Item
 														{...selectedTrashcan}
-														checkFilled={() => this.checkFilled(selectedTrashcan.id)}
+														checkFilled={() => this.checkFilled(selectedTrashcan._id)}
 														edit
 													/>
 													<div style={{ marginTop: '2rem' }}>
@@ -91,7 +96,7 @@ class Dashboard extends Component {
 											) : (
 												<Item
 													{...selectedTrashcan}
-													checkFilled={() => this.checkFilled(selectedTrashcan.id)}
+													checkFilled={() => this.checkFilled(selectedTrashcan._id)}
 												/>
 											)
 										}

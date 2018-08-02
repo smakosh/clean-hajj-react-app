@@ -16,8 +16,12 @@ const Item = ({ _id, name, date, lat, lng, filled, edit, checkFilled, report }) 
 				<div className={cx({ 'flexed-buttons': edit })}>
 					{edit && <Button href={`/edit-trashcan/${_id}`}>Edit</Button>}
 				</div>
-				<div style={{ textAlign: 'right' }}>
-					{!filled && <Button onClick={edit ? report : checkFilled}>Mark as Filled</Button>}
+				<div style={{ textAlign: 'right', display: 'flex', alignItems: 'center' }}>
+					<p style={{ marginRight: '1rem' }}>{edit ? 'Filled:' : 'Report:'}</p>
+					<label className="switch">
+						<input type="checkbox" onClick={edit ? checkFilled : report} checked={!filled} />
+						<span className="slider" />
+					</label>
 				</div>
 			</div>
 		</Card>

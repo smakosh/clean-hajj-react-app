@@ -46,12 +46,11 @@ export const editTrashcan = (id, name, lat, lng) => dispatch => {
 }
 
 export const filledTrashcan = id => dispatch => {
-	dispatch({ type: 'LOADING' })
 	axios.patch(`${URL}/api/trashcan/filled/${id}`)
 		.then(() => {
 			dispatch({
-				type: 'CLEAR_TRASHCANS',
-				payload: {}
+				type: 'CHECK_FILLED',
+				id
 			})
 			history.push('/dashboard')
 		})
