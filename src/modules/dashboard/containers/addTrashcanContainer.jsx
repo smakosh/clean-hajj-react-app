@@ -6,7 +6,7 @@ import { Loader } from '../../common'
 import TrashcanForm from '../components/TrashcanForm'
 import '../styles.scss'
 
-class AddTrashcan extends Component {
+class addTrashcanContainer extends Component {
     state = {
     	name: '',
     	lat: '',
@@ -63,4 +63,4 @@ const enhance = compose(
 	)
 )
 
-export default enhance(AddTrashcan)
+export default enhance(addTrashcanContainer)

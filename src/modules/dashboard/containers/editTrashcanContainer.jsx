@@ -6,7 +6,7 @@ import { Loader } from '../../common'
 import TrashcanForm from '../components/TrashcanForm'
 import '../styles.scss'
 
-class EditTrashcan extends Component {
+class editTrashcanContainer extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
@@ -78,4 +78,4 @@ const enhance = compose(
 	)
 )
 
-export default enhance(EditTrashcan)
+export default enhance(editTrashcanContainer)

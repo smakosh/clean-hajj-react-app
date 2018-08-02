@@ -12,8 +12,8 @@ import Register from './modules/auth/Register'
 import Dashboard from './modules/dashboard/containers/Dashboard'
 import Profile from './modules/profile/Profile'
 import EditProfile from './modules/profile/EditProfile'
-import AddTrashcan from './modules/dashboard/containers/AddTrashcan'
-import EditTrashcan from './modules/dashboard/containers/EditTrashcan'
+import addTrashcanContainer from './modules/dashboard/containers/addTrashcanContainer'
+import editTrashcanContainer from './modules/dashboard/containers/editTrashcanContainer'
 /* import AddWorker from './modules/workers/containers/AddWorker'
 import EditWorker from './modules/workers/containers/EditWorker' */
 import { NotFound } from './modules/common'
@@ -40,8 +40,8 @@ const AppRoutes = () => (
 				<Private path="/dashboard" exact component={Dashboard} />
 				<Private path="/profile" exact component={Profile} />
 				<Private path="/edit-profile" exact component={EditProfile} />
-				<Private path="/add-trashcan" component={AddTrashcan} />
-				<Private path="/edit-trashcan/:id" component={EditTrashcan} />
+				<Private path="/add-trashcan" component={addTrashcanContainer} />
+				<Private path="/edit-trashcan/:id" component={editTrashcanContainer} />
 				{/* Other routes */}
 				{/* <Private path="/add-worker" component={AddWorker} />
 				<Private path="/edit-worker/:id" component={EditWorker} /> */}

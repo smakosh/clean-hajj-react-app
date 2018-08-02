@@ -15,6 +15,7 @@ export default class Map extends Component {
 					bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_API_KEY }}
 					defaultCenter={this.props.center}
 					defaultZoom={this.props.zoom}
+					$hover={false}
 				>
 					{this.props.children}
 				</GoogleMapReact>
