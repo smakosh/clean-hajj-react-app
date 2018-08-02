@@ -14,12 +14,23 @@ class Dashboard extends Component {
 		this.state = {
 			trashcans: undefined,
 			selectedTrashcan: undefined,
-			loading: true
+			loading: true,
+			myLat: '',
+			myLng: ''
 		}
 	}
 
 	componentDidMount() {
 		this.props.getTrashcans()
+		if ('geolocation' in window.navigator) {
+			window.navigator.geolocation.getCurrentPosition(position => {
+				this.setState({ myLat: position.coords.latitude, myLng: position.coords.longitude })
+			}, (error_message) => {
+				console.error('An error has occured while retrieving location', error_message)
+			})
+		} else {
+			console.log('geolocation is not enabled on this browser')
+		}
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -36,8 +47,10 @@ class Dashboard extends Component {
 
 	report = id => this.props.report(id)
 
+	updateMarker = trashcan => this.setState({ selectedTrashcan: trashcan })
+
 	render() {
-		const { trashcans, selectedTrashcan, loading } = this.state
+		const { trashcans, selectedTrashcan, loading, myLat, myLng } = this.state
 		const { auth } = this.props
 		return (
 			<React.Fragment>
@@ -91,9 +104,16 @@ class Dashboard extends Component {
 													className={cx('marker', { 'marker-empty': !trashcan.filled, 'marker-filled': trashcan.filled })}
 													lat={trashcan.lat}
 													lng={trashcan.lng}
+													onClick={() => this.updateMarker(trashcan)}
 													text={trashcan.name.split('')[0].toUpperCase()}
 												>{trashcan.name.split('')[0].toUpperCase()}</div>
 											))}
+											<div
+												className="current-location"
+												lat={myLat}
+												lng={myLng}
+												text="current location"
+											/>
 										</Map>}
 									</div>
 								</div>

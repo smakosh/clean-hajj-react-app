@@ -55,6 +55,7 @@ module.exports = {
         'location': true,
         'document': true,
         'window': true,
+        'navigator': true,
         'localStorage': true,
         '__PATH_PREFIX__': true
     }

@@ -10,6 +10,7 @@ class editTrashcanContainer extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
+			id: props.trashcan.trashcans._id || '',
 			name: props.trashcan.trashcans.name || '',
 			lat: props.trashcan.trashcans.lat || '',
 			lng: props.trashcan.trashcans.lng || '',
@@ -23,7 +24,7 @@ class editTrashcanContainer extends Component {
 
     onSubmit = e => {
     	e.preventDefault()
-    	const { name, lat, lng } = this.state
+    	const { id, name, lat, lng } = this.state
     	const { editTrashcan } = this.props
     	if (name === '') {
     		this.setState({ errorName: 'Name field is required' })
@@ -33,7 +34,7 @@ class editTrashcanContainer extends Component {
     		this.setState({ errorLng: 'Lng field is required' })
     	}
 
-    	editTrashcan(name, lat, lng)
+    	editTrashcan(id, name, lat, lng)
     }
 
     handleChange = e => this.setState({ [e.target.name]: e.target.value })
