@@ -51,7 +51,11 @@ class Dashboard extends Component {
 		}, 3000)
 	}
 
-	report = id => this.props.report(id)
+	report = id => {
+		// eslint-disable-next-line
+		window.alert('Reported')
+		this.props.report(id)
+	}
 
 	updateMarker = trashcan => this.setState({ selectedTrashcan: trashcan })
 
