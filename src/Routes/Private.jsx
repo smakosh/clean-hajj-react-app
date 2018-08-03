@@ -4,6 +4,7 @@ import { Route, Redirect } from 'react-router-dom'
 import { compose, branch, renderComponent } from 'recompose'
 import { Loader, Footer } from '../modules/common'
 import Header from '../modules/common/Header'
+import Tabs from '../modules/common/Tabs'
 
 const Private = ({ auth, component: Component, ...rest }) => (
 	<Route
@@ -12,6 +13,7 @@ const Private = ({ auth, component: Component, ...rest }) => (
 			<React.Fragment>
 				<Header />
 				<Component {...props} />
+				<Tabs />
 				<Footer />
 			</React.Fragment>
 		) : (

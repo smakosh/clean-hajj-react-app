@@ -4,6 +4,7 @@ import { compose, branch, renderNothing } from 'recompose'
 import { Link } from 'react-router-dom'
 import { logout } from '../../auth/actions'
 import { Container, Button, Avatar } from '../../common'
+import logoutMobile from '../../../assets/logout.svg'
 import './styles.scss'
 
 const Header = ({ logout, auth }) => (
@@ -12,12 +13,16 @@ const Header = ({ logout, auth }) => (
 			<h2>
 				<Link to="/dashboard" style={{ textDecoration: 'none', color: '#212121' }}>Cleanify</Link>
 			</h2>
+			<div className="logout-mobile" onClick={logout}>
+				<p>Logout</p>
+				<img src={logoutMobile} alt="logout icon" />
+			</div>
 			<div className="left">
+				<p>Hello {auth.user.username}!</p>
+				{auth.user.type === 'customer' && <p>{auth.user.points} points</p>}
 				<Link to="/profile">
 					<Avatar type={auth.user.type} />
 				</Link>
-				<p>Hello {auth.user.username}!</p>
-				{auth.user.type === 'customer' && <p>{auth.user.points} points</p>}
 				<Button onClick={logout}>Logout</Button>
 			</div>
 		</Container>

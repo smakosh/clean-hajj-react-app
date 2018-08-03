@@ -10,7 +10,7 @@ const types = {
 	admin: { img: adminAvatar }
 }
 
-const Avatar = ({ type }) => {
+const Avatar = ({ type, size = '60' }) => {
 	const element = types[type]
 	if (element) {
 		return (
@@ -18,8 +18,8 @@ const Avatar = ({ type }) => {
 				alt={type}
 				src={element.img}
 				className="avatar"
-				width="60"
-				height="60"
+				width={size}
+				height={size}
 			/>
 		)
 	}
