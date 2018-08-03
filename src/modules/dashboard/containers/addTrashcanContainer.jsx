@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { branch, renderComponent, compose, lifecycle } from 'recompose'
 import { addNewTrashCan } from '../actions'
-import { Loader } from '../../common'
+import { Loader, Head } from '../../common'
 import TrashcanForm from '../components/TrashcanForm'
 import '../styles.scss'
 
@@ -35,11 +35,18 @@ class addTrashcanContainer extends Component {
 
 	render() {
     	return (
-    		<TrashcanForm
-    			{...this.state}
-    			onSubmit={this.onSubmit}
-				handleChange={this.handleChange}
-    		/>
+			<React.Fragment>
+				<Head
+    				url="https://cleanify.netlify.com/add-trashcan"
+    				title="Add new trash can"
+    				description="Add new trash can"
+				/>
+				<TrashcanForm
+					{...this.state}
+					onSubmit={this.onSubmit}
+					handleChange={this.handleChange}
+				/>
+			</React.Fragment>
     	)
 	}
 }

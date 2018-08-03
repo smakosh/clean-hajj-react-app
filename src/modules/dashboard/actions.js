@@ -57,9 +57,22 @@ export const filledTrashcan = id => dispatch => {
 		.catch(() => history.push('/dashboard'))
 }
 
-export const report = id => dispatch => {
+export const deleteReport = id => dispatch => {
 	dispatch({ type: 'LOADING' })
 	axios.patch(`${URL}/api/trashcan/report/${id}`)
+		.then(() => {
+			dispatch({
+				type: 'CLEAR_TRASHCANS',
+				payload: {}
+			})
+			history.push('/dashboard')
+		})
+		.catch(() => history.push('/dashboard'))
+}
+
+export const report = id => dispatch => {
+	dispatch({ type: 'LOADING' })
+	axios.post(`${URL}/api/trashcan/report/${id}`)
 		.then(() => {
 			dispatch({
 				type: 'CLEAR_TRASHCANS',

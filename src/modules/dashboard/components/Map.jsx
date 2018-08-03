@@ -8,21 +8,13 @@ export default class Map extends Component {
 		zoom: 14
 	}
 
-	onBoundsChange = () => console.log('test')
-
 	render() {
 		return (
 			<div className="google-map">
 				<GoogleMapReact
 					bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_API_KEY }}
 					defaultCenter={this.props.center}
-					center={this.props.center}
 					defaultZoom={this.props.zoom}
-					$hover={false}
-					nBoundsChange={this.onBoundsChange}
-					onChildClick={this.onBoundsChange}
-					onChildMouseEnter={this.onBoundsChange}
-					onChildMouseLeave={this.onBoundsChange}
 				>
 					{this.props.children}
 				</GoogleMapReact>

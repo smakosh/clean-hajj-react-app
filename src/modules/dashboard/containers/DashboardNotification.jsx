@@ -9,7 +9,7 @@ import Item from '../components/Item'
 import DashbordIcon from '../../../assets/trash.svg'
 import '../styles.scss'
 
-class Dashboard extends Component {
+class DashboardNotification extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
@@ -36,9 +36,11 @@ class Dashboard extends Component {
 
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.trashcan.trashcans) {
+			const trashcanReported = nextProps.trashcan.trashcans
+				.find(trashcan => trashcan._id === this.props.match.params.id)
 			this.setState({
 				trashcans: nextProps.trashcan.trashcans,
-				selectedTrashcan: nextProps.trashcan.trashcans[0],
+				selectedTrashcan: trashcanReported,
 				loading: false
 			})
 		}
@@ -88,7 +90,7 @@ class Dashboard extends Component {
 													itemOnMap={this.itemOnMap}
 													report={() => this.report(selectedTrashcan._id)}
 												/>
-											) : (
+											) : auth.user.type === 'admin' ? (
 												<React.Fragment>
 													<Item
 														{...selectedTrashcan}
@@ -99,6 +101,11 @@ class Dashboard extends Component {
 														<Button href="/add-trashcan">Add trashcan</Button>
 													</div>
 												</React.Fragment>
+											) : (
+												<Item
+													{...selectedTrashcan}
+													checkFilled={() => this.checkFilled(selectedTrashcan._id)}
+												/>
 											)
 										}
 									</div>
@@ -147,4 +154,4 @@ const enhance = compose(
 	)
 )
 
-export default enhance(Dashboard)
+export default enhance(DashboardNotification)

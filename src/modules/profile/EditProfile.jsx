@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { compose, branch, renderComponent } from 'recompose'
 import { editProfile } from './actions'
-import { Loader, Container, Button, Input, Card, Error } from '../common'
+import { Loader, Container, Button, Input, Card, Error, Head } from '../common'
 
 class EditProfile extends Component {
 	constructor(props) {
@@ -57,6 +57,11 @@ class EditProfile extends Component {
     		error } = this.state
     	return (
     		<Container className="profile-form">
+    			<Head
+    				url="https://cleanify.netlify.com/edit-profile"
+    				title="Edit profile"
+    				description="Edit profile"
+    			/>
     			<Card>
     				<form onSubmit={this.onSubmit}>
     					<Input type="text" label="First name" name="firstName" value={firstName} onChange={this.handleChange} error={errorFirstName} />

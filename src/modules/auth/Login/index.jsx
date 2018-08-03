@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { compose, renderComponent, branch } from 'recompose'
-import { Input, Button, Error, Loader, Card, Container } from '../../common'
+import { Input, Button, Error, Loader, Card, Container, Head } from '../../common'
 import { login } from '../actions'
 import cleanifyLogo from '../assets/logo.svg'
 import '../styles.scss'
@@ -49,6 +49,11 @@ class Login extends Component {
 		const { email, password, emailError, passwordError, error } = this.state
 		return (
 			<Container className="auth">
+				<Head
+					url="https://cleanify.netlify.com/"
+					title="Login"
+					description="Login"
+				/>
 				<Card>
 					<div className="brand">
 						<img src={cleanifyLogo} alt="cleanify logo" />

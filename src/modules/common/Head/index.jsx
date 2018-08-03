@@ -10,7 +10,7 @@ const Head = ({
 	return (
 		<Helmet>
 			{/* TODO: Add structured data <script type="application/ld+json">{structuredData}</script> */}
-			{title && <title>{title}</title>}
+			{title && <title>Cleanify | {title}</title>}
 			<meta
 				name="description"
 				content={description || 'description'}

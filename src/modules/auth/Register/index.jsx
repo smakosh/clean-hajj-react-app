@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { compose, renderComponent, branch } from 'recompose'
-import { Input, Button, Error, Loader, Card, Container } from '../../common'
+import { Input, Button, Error, Loader, Card, Container, Head } from '../../common'
 import { register } from '../actions'
 import '../styles.scss'
 
@@ -85,7 +85,12 @@ class Register extends Component {
 			error
 		} = this.state
 		return (
-			<Container className="auth">
+			<Container className="signup">
+				<Head
+					url="https://cleanify.netlify.com/register"
+					title="Create an account"
+					description="Register"
+				/>
 				<Card>
 					<form onSubmit={this.onSubmit}>
 						<Input type="text" label="First name" name="firstName" value={firstName} onChange={this.handleChange} error={firstNameError} />
