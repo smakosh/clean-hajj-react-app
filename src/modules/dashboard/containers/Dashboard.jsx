@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { compose, branch, renderComponent } from 'recompose'
+import { compose, branch, renderComponent, lifecycle } from 'recompose'
 import cx from 'classnames'
 import { connect } from 'react-redux'
 import Map from '../components/Map'
@@ -22,7 +22,7 @@ class Dashboard extends Component {
 	}
 
 	componentDidMount() {
-		this.props.getTrashcans()
+		// this.props.getTrashcans()
 		if ('geolocation' in window.navigator) {
 			window.navigator.geolocation.getCurrentPosition(position => {
 				this.setState({ myLat: position.coords.latitude, myLng: position.coords.longitude })
@@ -79,7 +79,7 @@ class Dashboard extends Component {
 									<div className="responsive-img">
 										<img src="https://cdn.dribbble.com/users/231299/screenshots/4873214/garbage.png" alt="trashcans not available" />
 									</div>
-									<h2>No trashcans are available right now! {auth.user.typee === 'admin' && 'start adding a new one!'}</h2>
+									<h2>No trashcans are available right now! {auth.user.type === 'admin' && 'start adding a new one!'}</h2>
 									{auth.user.type === 'admin' && <Button href="/add-trashcan">Add trashcan</Button>}
 								</div>
 							) : (
@@ -145,6 +145,11 @@ const mapStateToProps = ({ auth, trashcan }) => ({
 
 const enhance = compose(
 	connect(mapStateToProps, { getTrashcans, filledTrashcan, report }),
+	lifecycle({
+		componentWillMount() {
+			this.props.getTrashcans()
+		}
+	}),
 	branch(
 		({ auth }) => auth.user === undefined || auth.loading,
 		renderComponent(Loader)
