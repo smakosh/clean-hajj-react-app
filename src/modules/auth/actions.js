@@ -6,6 +6,11 @@ const API = process.env.REACT_APP_PROD_API
 // const API = 'http://localhost:5000'
 const URL = `https://cors-anywhere.herokuapp.com/${API}`
 
+const authFailed = error => ({
+	type: 'AUTH_FAILED',
+	payload: error.response.data
+})
+
 export const verifyToken = token => dispatch => {
 	dispatch({ type: 'LOADING_USER' })
 	axios({
@@ -34,7 +39,7 @@ export const register = (firstName, lastName, username, email, password) => disp
 			dispatch({ type: 'SAVE_USER', payload: res.data })
 			history.push('/dashboard')
 		})
-		.catch(err => dispatch({ type: 'AUTH_FAILED', payload: err.response.data }))
+		.catch(err => dispatch(authFailed(err)))
 }
 
 export const login = (email, password) => dispatch => {
@@ -48,7 +53,7 @@ export const login = (email, password) => dispatch => {
 			dispatch({ type: 'SAVE_USER', payload: res.data })
 			history.push('/dashboard')
 		})
-		.catch(err => dispatch({ type: 'AUTH_FAILED', payload: err.response.data }))
+		.catch(err => dispatch(authFailed(err)))
 }
 
 export const logout = () => dispatch => {

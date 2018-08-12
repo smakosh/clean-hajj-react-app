@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { compose, renderComponent, branch } from 'recompose'
-import { Input, Button, Error, Loader, Card, Container, Head } from '../../common'
+import { Input, Button, Loader, Card, Container, Head } from '../../common'
 import { register } from '../actions'
+import isEmpty from '../../../utils/isEmpty'
 import '../styles.scss'
 
 class Register extends Component {
@@ -20,12 +21,12 @@ class Register extends Component {
 		firstNameError: false,
 		lastNameError: false,
 		usernameError: false,
-		error: undefined
+		errors: {}
 	}
 
 	componentDidMount() {
-		if (this.props.auth.error) {
-			this.setState({ error: this.props.auth.error.error })
+		if (this.props.auth.errors) {
+			this.setState({ errors: this.props.auth.errors })
 		}
 	}
 
@@ -55,7 +56,7 @@ class Register extends Component {
 				emailError: false,
 				passwordError: false,
 				confirmPasswordError: false,
-				error: undefined
+				errors: {}
 			})
 			register(firstName, lastName, username, email, password)
 		}
@@ -82,7 +83,7 @@ class Register extends Component {
 			lastNameError,
 			usernameError,
 			confirmPasswordError,
-			error
+			errors
 		} = this.state
 		return (
 			<Container className="signup">
@@ -93,13 +94,12 @@ class Register extends Component {
 				/>
 				<Card>
 					<form onSubmit={this.onSubmit}>
-						<Input type="text" label="First name" name="firstName" value={firstName} onChange={this.handleChange} error={firstNameError} />
-						<Input type="text" label="Last name" name="lastName" value={lastName} onChange={this.handleChange} error={lastNameError} />
-						<Input type="text" label="Username" name="username" value={username} onChange={this.handleChange} error={usernameError} />
-						<Input type="text" label="Email" name="email" value={email} onChange={this.handleChange} error={emailError} />
-						<Input type="password" label="Password" name="password" value={password} onChange={this.handleChange} error={passwordError} />
+						<Input type="text" label="First name" name="firstName" value={firstName} onChange={this.handleChange} error={!isEmpty(errors) && errors.firstName ? errors.firstName.message : firstNameError} />
+						<Input type="text" label="Last name" name="lastName" value={lastName} onChange={this.handleChange} error={!isEmpty(errors) && errors.lastName ? errors.lastName.message : lastNameError} />
+						<Input type="text" label="Username" name="username" value={username} onChange={this.handleChange} error={!isEmpty(errors) && errors.username ? errors.username.message : usernameError} />
+						<Input type="text" label="Email" name="email" value={email} onChange={this.handleChange} error={!isEmpty(errors) && errors.email ? errors.email.message : emailError} />
+						<Input type="password" label="Password" name="password" value={password} onChange={this.handleChange} error={!isEmpty(errors) && errors.password ? errors.password.message : passwordError} />
 						<Input type="password" label="Confirm password" name="confirmPassword" value={confirmPassword} onChange={this.handleChange} error={confirmPasswordError} />
-						{error !== undefined && <Error>{error}</Error>}
 						<div className="center">
 							<Button type="submit">Register</Button>
 						</div>

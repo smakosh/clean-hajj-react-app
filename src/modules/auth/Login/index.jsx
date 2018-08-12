@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { compose, renderComponent, branch } from 'recompose'
-import { Input, Button, Error, Loader, Card, Container, Head } from '../../common'
+import { Input, Button, Loader, Card, Container, Head } from '../../common'
 import { login } from '../actions'
+import isEmpty from '../../../utils/isEmpty'
 import cleanifyLogo from '../assets/logo.svg'
 import '../styles.scss'
 
@@ -13,12 +14,12 @@ class Login extends Component {
 		password: '',
 		emailError: false,
 		passwordError: false,
-		error: undefined
+		errors: {}
 	}
 
 	componentDidMount() {
-		if (this.props.auth.error) {
-			this.setState({ error: this.props.auth.error.error })
+		if (this.props.auth.errors && this.props.auth.errors.errors) {
+			this.setState({ errors: this.props.auth.errors.errors })
 		}
 	}
 
@@ -33,7 +34,7 @@ class Login extends Component {
 		} else if (password === '') {
 			this.setState({ passwordError: 'Password is required' })
 		} else {
-			this.setState({ emailError: false, passwordError: false, error: undefined })
+			this.setState({ emailError: false, passwordError: false, errors: {} })
 			login(email, password)
 		}
 	}
@@ -46,7 +47,7 @@ class Login extends Component {
 	handleChange = e => this.setState({ [e.target.name]: e.target.value })
 
 	render() {
-		const { email, password, emailError, passwordError, error } = this.state
+		const { email, password, emailError, passwordError, errors } = this.state
 		return (
 			<Container className="auth">
 				<Head
@@ -59,9 +60,8 @@ class Login extends Component {
 						<img src={cleanifyLogo} alt="cleanify logo" />
 					</div>
 					<form onSubmit={this.onSubmit}>
-						<Input label="Email" type="email" name="email" value={email} onChange={this.handleChange} error={emailError} />
+						<Input label="Email" type="email" name="email" value={email} onChange={this.handleChange} error={!isEmpty(errors) && errors.email ? errors.email : emailError} />
 						<Input label="Password" type="password" name="password" value={password} onChange={this.handleChange} error={passwordError} />
-						{error !== undefined && <Error>{error}</Error>}
 						<div className="center">
 							<Button type="submit">Login</Button>
 						</div>

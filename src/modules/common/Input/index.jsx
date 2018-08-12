@@ -8,7 +8,7 @@ const Input = ({ type, name, value, onChange, label, error }) => (
 		<span className="highlight" />
 		<span className="bar" />
 		<label>{label}</label>
-		{error && <span>{error}</span>}
+		{error && <span className="error">{error}</span>}
 	</div>
 )
 

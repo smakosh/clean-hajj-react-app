@@ -11,12 +11,12 @@ export default (state = { loading: false }, action) => {
 		}
 	case 'EDIT_PROFILE_FAILED':
 		return {
-			error: action.payload,
+			errors: action.payload,
 			loading: false
 		}
 	case 'AUTH_FAILED':
 		return {
-			error: action.payload,
+			errors: action.payload,
 			loading: false
 		}
 	case 'LOADING_USER':

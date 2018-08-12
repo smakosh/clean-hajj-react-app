@@ -62,7 +62,7 @@ class EditProfile extends Component {
     				title="Edit profile"
     				description="Edit profile"
     			/>
-    			<Card>
+    			<Card className="profile-form-edit">
     				<form onSubmit={this.onSubmit}>
     					<Input type="text" label="First name" name="firstName" value={firstName} onChange={this.handleChange} error={errorFirstName} />
     					<Input type="text" label="Last name" name="lastName" value={lastName} onChange={this.handleChange} error={errorLastName} />
